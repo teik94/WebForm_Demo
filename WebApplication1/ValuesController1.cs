@@ -4,25 +4,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication1.Controller;
 
 namespace WebApplication1
 {
-    public class ValuesController1 : ApiController
+    public class RegisController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<controller>/5
-        public string Get(int id)
+        [ActionName("MyApi")]
+        [HttpGet]
+        public string MyApi(int id)
         {
-            return "value";
+            if(id == 1)
+            {
+                return "Register Success";
+            }
+            else
+            {
+                return "Register Failed";
+            }
+            
         }
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        public void Post([FromBody] User user)
         {
         }
 

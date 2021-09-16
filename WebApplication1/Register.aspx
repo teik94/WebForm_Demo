@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebApplication1.Register" %>
+﻿<%@ Page Async="True" Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebApplication1.Register" %>
 
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -21,19 +21,22 @@
             <asp:TextBox CssClass="col-md-4 form-control" ID="txtAddress" runat="server"></asp:TextBox>
         </div>
         <div class="form-group row">
-            <asp:Button ID="btnSubmit" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
+            <asp:Button ID="btnSubmit" UseSubmitBehavior="false" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
         </div>
-        <% if (IsSucess)
+        <%--<% if (IsSucess)
             { %>
         <span style="color: green"><%: Message %></span>
         <% } %>
         <% else
         { %>
         <span style="color: red"><%: Message %></span>
-        <% } %>
+        <% } %>--%>
+
+        <span id="Message" style="color: green"></span>
     </div>
 
     <asp:Button  ID="btnCheck" UseSubmitBehavior="false" OnClick="btnCheck_Click" runat="server" Text="Check" />
+    <button type="button" onclick="getData()">Get</button>
 
     <% foreach (var item in Get())
         { %>
@@ -45,4 +48,27 @@
     </div>
     
     <%} %>
+
+    <script>
+        function getData() {
+            $.get("api/Regis/MyApi/" + $("#MainContent_txtUsername").val(),
+                function (result) {
+                    console.log(result);
+                    $("#Message").html(result);
+                });
+
+            //var xhttp = new XMLHttpRequest();
+            //xhttp.onreadystatechange = function () {
+            //    if (this.readyState == 4 && this.status == 200) {
+            //        console.log(this.responseText);
+            //    }
+            //};
+            //xhttp.open("GET", "api/Regis/MyApi/5", true);
+            //xhttp.send();
+        }
+
+       // $(document).ready(getData);
+    </script>
 </asp:Content>
+
+

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -20,11 +22,12 @@ namespace WebApplication1
             return userList;
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
+            
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        protected async void btnSubmit_Click(object sender, EventArgs e)
         {
             var username = txtUsername.Text;
             var pass = txtPassword.Text;
@@ -38,15 +41,22 @@ namespace WebApplication1
                 Address = address
             };
 
-            IsSucess = RegisterController.RegisterProcess(user);
-            if(IsSucess)
-            {
-                Message = "Register Success!";
-            }
-            else
-            {
-                Message = "Register Failed!";
-            }
+            var httpClient = new HttpClient();
+            var result = await httpClient.GetAsync("https://localhost:44309/api/Regis/MyApi/5");
+
+            // Đọc nội dung content trả về - ĐỌC CHUỖI NỘI DUNG
+            string htmltext = await result.Content.ReadAsStringAsync();
+
+            Message = htmltext;
+
+            //if (IsSucess)
+            //{
+            //    Message = "Register Success!";
+            //}
+            //else
+            //{
+            //    Message = "Register Failed!";
+            //}
         }
 
         protected void btnCheck_Click(object sender, EventArgs e)
