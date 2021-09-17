@@ -42,11 +42,11 @@ namespace WebApplication1
             };
 
             var httpClient = new HttpClient();
-            var result = await httpClient.GetAsync("https://localhost:44309/api/Regis/MyApi/5");
+            var result = await httpClient.GetAsync("https://localhost:44309/api/Register/RegisAcc2?username=" + username +  "&password=" + pass);
 
             // Đọc nội dung content trả về - ĐỌC CHUỖI NỘI DUNG
             string htmltext = await result.Content.ReadAsStringAsync();
-
+            IsSucess = true;
             Message = htmltext;
 
             //if (IsSucess)
@@ -61,7 +61,7 @@ namespace WebApplication1
 
         protected void btnCheck_Click(object sender, EventArgs e)
         {
-            userList = RegisterController.GetListUsers();
+            //userList = RegisterController.GetListUsers();
         }
     }
 }

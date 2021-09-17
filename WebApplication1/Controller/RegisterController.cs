@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication1.Controller
 {
-    public static class RegisterController
+    public static class RegisterExtension
     {
         static List<User> listUser = new List<User>();
         public static bool RegisterProcess(User user)

@@ -23,14 +23,14 @@
         <div class="form-group row">
             <asp:Button ID="btnSubmit" UseSubmitBehavior="false" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
         </div>
-        <%--<% if (IsSucess)
+        <% if (IsSucess)
             { %>
         <span style="color: green"><%: Message %></span>
         <% } %>
         <% else
         { %>
         <span style="color: red"><%: Message %></span>
-        <% } %>--%>
+        <% } %>
 
         <span id="Message" style="color: green"></span>
     </div>

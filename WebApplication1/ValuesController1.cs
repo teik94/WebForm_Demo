@@ -8,14 +8,16 @@ using WebApplication1.Controller;
 
 namespace WebApplication1
 {
-    public class RegisController : ApiController
+    [RoutePrefix("api/Register")]
+    public class RegisterController : ApiController
     {
-        // GET api/<controller>/5
-        [ActionName("MyApi")]
+        // GET api/Register/RegisAcc/username/password
         [HttpGet]
-        public string MyApi(int id)
+        [ActionName("RegisAcc")]
+        [Route("RegisAcc/{username}/{password}")]
+        public string RegisAcc(string username, string password)
         {
-            if(id == 1)
+            if(username != "")
             {
                 return "Register Success";
             }
@@ -25,6 +27,32 @@ namespace WebApplication1
             }
             
         }
+
+        // GET api/Register/RegisAcc?username="kiet"&password="123"
+        [HttpGet]
+        [ActionName("RegisAcc2")]
+        [Route("RegisAcc2")]
+        public string RegisAcc2(string username, string password)
+        {
+            if (username != "")
+            {
+                return "Register Success";
+            }
+            else
+            {
+                return "Register Failed";
+            }
+
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public string Login([FromBody] User user)
+        {
+            return "Success";
+        }
+
+
 
         // POST api/<controller>
         public void Post([FromBody] User user)

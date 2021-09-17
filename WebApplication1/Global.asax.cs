@@ -7,6 +7,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using WebApplication1.App_Start;
 
 namespace WebApplication1
 {
@@ -17,11 +18,9 @@ namespace WebApplication1
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            RouteTable.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { id = System.Web.Http.RouteParameter.Optional }
-            );
+
+            // Pass a delegate to the Configure method.
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }
